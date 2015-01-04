@@ -3,4 +3,4 @@ data/*
 models/*
 *.png
 *.jpg
-*.log
+logs/*

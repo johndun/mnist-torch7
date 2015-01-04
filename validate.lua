@@ -3,8 +3,8 @@ torch.setdefaulttensortype('torch.FloatTensor')
 torch.setnumthreads(4)
 require 'cutorch'
 require 'cunn'
--- require 'setup_dummy' -- 98.31%, 16 epochs
-require 'setup_dummy2' -- 99.34%, 18 epochs
+-- require 'setup_mlp' -- 98.31%, 15 epochs
+require 'setup_convnet1' -- 99.25%, 15 epochs
 require 'lib/data_prep'
 require 'lib/minibatch_sgd'
 
