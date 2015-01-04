@@ -2,7 +2,6 @@ require 'torch'
 require 'nn'
 require 'cunn'
 
-
 train_fname = 'data/train.t7'
 test_fname = 'data/test.t7'
 
@@ -16,7 +15,7 @@ sgd_config = {
   learningRateDecay = 1.0e-6,
   momentum = 0.9,
   xBatchSize = 128, 
-  max_epochs = 20
+  max_epochs = 18
 }
 
 function create_model()

@@ -1,7 +1,8 @@
-require 'lib/data_prep'
+require 'torch'
 torch.setdefaulttensortype('torch.FloatTensor')
 torch.setnumthreads(4)
 
+require 'lib/data_prep'
 local train0_fname = 'data/train_32x32.t7'
 local train_fname = 'data/train.t7'
 local test0_fname = 'data/test_32x32.t7'

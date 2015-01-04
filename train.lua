@@ -1,3 +1,4 @@
+require 'torch'
 torch.setdefaulttensortype('torch.FloatTensor')
 torch.setnumthreads(4)
 require 'cutorch'

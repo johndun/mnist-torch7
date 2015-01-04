@@ -1,3 +1,4 @@
+require 'torch'
 require 'image'
 
 function load_data(fname)
