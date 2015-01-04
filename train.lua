@@ -54,10 +54,10 @@ end
 
 local cmd = torch.CmdLine()
 cmd:text()
-cmd:text("Options:")
-cmd:option("-seed", 11, 'fixed input seed')
+cmd:text('Options:')
+cmd:option('-seed', 11, 'fixed input seed')
+cmd:option('-progress', false, 'show progress bars')
 opt = cmd:parse(arg)
-print(opt.seed)
+print(opt)
 torch.manualSeed(opt.seed)
-
 train()

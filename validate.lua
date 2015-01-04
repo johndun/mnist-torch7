@@ -3,7 +3,7 @@ torch.setnumthreads(4)
 require 'cutorch'
 require 'cunn'
 -- require 'setup_dummy' -- 98.31%, 28.603s
-require 'setup_dummy2'
+require 'setup_dummy2' -- 99.16%, 22m57.520s
 require 'lib/data_prep'
 require 'lib/minibatch_sgd'
 
@@ -58,5 +58,12 @@ local function validate()
   
 end
 
-torch.manualSeed(11)
+local cmd = torch.CmdLine()
+cmd:text()
+cmd:text('Options:')
+cmd:option('-seed', 11, 'fixed input seed')
+cmd:option('-progress', false, 'show progress bars')
+opt = cmd:parse(arg)
+print(opt)
+torch.manualSeed(opt.seed)
 validate()

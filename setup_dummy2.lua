@@ -16,7 +16,7 @@ sgd_config = {
   learningRateDecay = 1.0e-6,
   momentum = 0.9,
   xBatchSize = 128, 
-  max_epochs = 10
+  max_epochs = 20
 }
 
 function create_model()

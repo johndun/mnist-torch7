@@ -14,7 +14,9 @@ function minibatch_sgd(model, criterion,
     if t + batch_size > train_x:size(1) then
       break
     end
-    xlua.progress(t, train_x:size(1))
+    if opt.progress then
+      xlua.progress(t, train_x:size(1))
+    end
     local inputs = torch.Tensor(batch_size,
                                 train_x:size(2),
                                 train_x:size(3),
@@ -47,7 +49,9 @@ function minibatch_sgd(model, criterion,
       collectgarbage('collect')
     end
   end
-  xlua.progress(train_x:size(1), train_x:size(1))
+  if opt.progress then
+    xlua.progress(train_x:size(1), train_x:size(1))
+  end
 
   return confusion
 end
@@ -55,6 +59,9 @@ end
 function test_augmented(model, params, test_x, test_y)
   local confusion = optim.ConfusionMatrix(classes)
   for i = 1, test_x:size(1) do
+    if opt.progress then
+      xlua.progress(i, test_x:size(1))
+    end
     local preds = torch.Tensor(10):zero()
     local x = augment(test_x[i], jitter_params)
     local z = model:forward(x:cuda()):float()
@@ -63,9 +70,10 @@ function test_augmented(model, params, test_x, test_y)
     end
     preds:div(x:size(1))
     confusion:add(preds, test_y[i])
-    xlua.progress(i, test_x:size(1))
   end
-  xlua.progress(test_x:size(1), test_x:size(1))
+  if opt.progress then
+    xlua.progress(test_x:size(1), test_x:size(1))
+  end
   return confusion
 end
 
@@ -73,7 +81,9 @@ function test(model, params, test_x, test_y)
   local confusion = optim.ConfusionMatrix(classes)
   local batch_size = 100 -- test_x:size(1) % batch_size == 0
   for t = 1, test_x:size(1), batch_size do
-    xlua.progress(t, test_x:size(1))
+    if opt.progress then
+      xlua.progress(t, test_x:size(1))
+    end
     local inputs = torch.Tensor(batch_size,
                                 test_x:size(2),
                                 test_x:size(3),
@@ -92,6 +102,8 @@ function test(model, params, test_x, test_y)
       confusion:add(output[k], targets[k])
     end
   end
-  xlua.progress(test_x:size(1), test_x:size(1))
+  if opt.progress then
+    xlua.progress(test_x:size(1), test_x:size(1))
+  end
   return confusion
 end
