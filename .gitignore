@@ -1,6 +1,7 @@
-data
+
 data/*
-models/*
+models/*.model
+models/*.t7
 *.png
 *.jpg
-logs/*
+logs/*.log
